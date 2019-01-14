@@ -1,13 +1,12 @@
-
 <?php
-require_once './config.php';
-require_once './database.php';
-require_once './fungsi.php';
+require_once './app/config.php';
+require_once './app/database.php';
+require_once './app/fungsi.php';
 
 _isLogin();
 
 $username = $_SESSION['username'];
-$profil = db_user_get_data_by_username($db_conn, $username);
+$profil = db_petugas_get_data_by_username($db_conn, $username);
 ?>
 <html>
     <head>
@@ -22,11 +21,6 @@ $profil = db_user_get_data_by_username($db_conn, $username);
                 <td><?= $profil['username'] ?></td>
             </tr>
             <tr>
-                <td>NIP</td>
-                <td>:</td>
-                <td><?= $profil['nip'] ?></td>
-            </tr>
-            <tr>
                 <td>Nama Pengguna</td>
                 <td>:</td>
                 <td><input type="text" name="nama" value="<?= $profil['nama'] ?>"></td>
@@ -35,15 +29,6 @@ $profil = db_user_get_data_by_username($db_conn, $username);
                 <td>Password</td>
                 <td>:</td>
                 <td><input type="password" name="password"></td>
-            </tr>
-            <tr>
-                <td>Alamat</td>
-                <td>:</td>
-                <td>
-                    <textarea name="alamat">
-                        <?= $profil['alamat'] ?>
-                    </textarea>
-                </td>
             </tr>
             <tr>
                 <td></td>
