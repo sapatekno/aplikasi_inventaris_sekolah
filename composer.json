@@ -1,0 +1,13 @@
+{
+    "name": "vendor/prasarana",
+    "description": "Description of project prasarana.",
+    "authors": [
+        {
+            "name": "SAPATEKNO",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "v7.1.8"
+    }
+}
