@@ -33,9 +33,9 @@ _isLogin();
         <ul>
             <?php if ($_SESSION['id_level'] == 1) : ?>
                 <!-- menu untuk level admin -->
-                <li><a href="./barang.php">Data Barang</a></li>
+                <li><a href="./inventaris.php">Data Inventaris</a></li>
                 <li><a href="./jenis.php">Data Jenis Barang</a></li>
-                <li><a href="./pengguna.php">Data Pengguna</a></li>
+                <li><a href="./pegawai.php">Data Pegawai</a></li>
                 <li><a href="./ruang.php">Data Ruangan</a></li>
             <?php endif; ?>
             <?php if ($_SESSION['id_level'] == 2) : ?>
