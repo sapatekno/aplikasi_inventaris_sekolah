@@ -1,7 +1,8 @@
 <?php
-require_once './config.php';
-require_once './database.php';
-require_once './fungsi.php';
+//berkas sistem
+require_once './app/config.php';
+require_once './app/database.php';
+require_once './app/fungsi.php';
 
 if ($_SESSION['login'] == TRUE){
     //hapus sesi jika ada

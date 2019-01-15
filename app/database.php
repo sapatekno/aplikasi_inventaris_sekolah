@@ -32,6 +32,19 @@ function db_petugas_get_data_by_username($db_conn, $username) {
     return $result;
 }
 
+//mengupdate data petugas lama
+function db_petugas_update($db_conn, $username, $nama, $password) {
+    if (!empty($password)) {
+        $password = sha1($password);
+        $sql = "UPDATE petugas SET nama = '$nama', password = '$password' WHERE username = '$username'";
+    } else {
+        $sql = "UPDATE petugas SET nama = '$nama' WHERE username = '$username'";
+    }
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+    $result = mysqli_affected_rows($db_conn);
+    return $result;
+}
+
 //mengambil nama level berdasarkan id leverl
 function db_level_get_nama_by_id($db_conn, $id_level) {
     $sql = "SELECT nama_level FROM level WHERE id_level = '$id_level'";
