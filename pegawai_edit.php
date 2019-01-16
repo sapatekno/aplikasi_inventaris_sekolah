@@ -12,7 +12,7 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 $edit = filter_input(INPUT_POST, 'edit', FILTER_SANITIZE_STRING);
 
 if (!empty($id)) {
-    $data = db_jenis_get_data_by_id($db_conn, $id);
+    $data = db_pegawai_get_data_by_id($db_conn, $id);
 
     //jika id data tidak ditemukan dalam database
     if (empty($data)) {
@@ -21,15 +21,15 @@ if (!empty($id)) {
     }
 
     if (!empty($edit)) {
-        $kode_jenis = filter_input(INPUT_POST, 'kode_jenis', FILTER_SANITIZE_STRING);
-        $nama_jenis = filter_input(INPUT_POST, 'nama_jenis', FILTER_SANITIZE_STRING);
-        $keterangan = filter_input(INPUT_POST, 'keterangan', FILTER_SANITIZE_STRING);
+        $nip = filter_input(INPUT_POST, 'nip', FILTER_SANITIZE_STRING);
+        $nama_pegawai = filter_input(INPUT_POST, 'nama_pegawai', FILTER_SANITIZE_STRING);
+        $alamat = filter_input(INPUT_POST, 'alamat', FILTER_SANITIZE_STRING);
 
-        $simpan = db_jenis_update($db_conn, $id, $kode_jenis, $nama_jenis, $keterangan);
+        $simpan = db_pegawai_update($db_conn, $id, $nip, $nama_pegawai, $alamat);
 
         if ($simpan > 0) {
             //berhasil menyimpan data
-            header('Location: ./jenis.php');
+            header('Location: ./pegawai.php');
         } else {
             $error = 1;
             $pesan_error = 'Tidak dapat memperbaharui database';
@@ -42,10 +42,10 @@ if (!empty($id)) {
 ?>
 <html>
     <head>
-        <title>Edit Data Jenis Barang</title>
+        <title>Edit Data Pegawai</title>
     </head>
     <body>
-        <p><a href="./index.php">Home</a> > <a href="./jenis.php">Jenis Barang</a> > Edit Jenis Barang</p>
+        <p><a href="./index.php">Home</a> > <a href="./pegawai.php">Pegawai</a> > Edit Pegawai</p>
         <?php if ($error == 1) : ?>
             <p><?= $pesan_error ?></p>
         <?php else : ?>
@@ -53,24 +53,24 @@ if (!empty($id)) {
             <form action="" method="post">
                 <table>
                     <tr>
-                        <td>Kode Jenis Barang</td>
+                        <td>NIP</td>
                         <td>:</td>
                         <td>
-                            <input type="text" name="kode_jenis" value="<?= $data['kode_jenis'] ?>" required autofocus>
+                            <input type="text" name="nip" value="<?= $data['nip'] ?>" required autofocus>
                         </td>
                     </tr>
                     <tr>
-                        <td>Nama Jenis Barang</td>
+                        <td>Nama Pegawai</td>
                         <td>:</td>
                         <td>
-                            <input type="text" name="nama_jenis" value="<?= $data['nama_jenis'] ?>" required>
+                            <input type="text" name="nama_pegawai" value="<?= $data['nama_pegawai'] ?>" required>
                         </td>
                     </tr>
                     <tr>
-                        <td>Keterangan</td>
+                        <td>Alamat</td>
                         <td>:</td>
                         <td>
-                            <textarea name="keterangan"><?= $data['keterangan'] ?></textarea>
+                            <textarea name="alamat" required><?= $data['alamat'] ?></textarea>
                         </td>
                     </tr>
                     <tr>

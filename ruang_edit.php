@@ -14,6 +14,12 @@ $edit = filter_input(INPUT_POST, 'edit', FILTER_SANITIZE_STRING);
 if (!empty($id)) {
     $data = db_ruang_get_data_by_id($db_conn, $id);
 
+    //jika id data tidak ditemukan dalam database
+    if (empty($data)) {
+        $error = 1;
+        $pesan_error = 'ID data tidak ditemukan';
+    }
+
     if (!empty($edit)) {
         $kode_ruang = filter_input(INPUT_POST, 'kode_ruang', FILTER_SANITIZE_STRING);
         $nama_ruang = filter_input(INPUT_POST, 'nama_ruang', FILTER_SANITIZE_STRING);

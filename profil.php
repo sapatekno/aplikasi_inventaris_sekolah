@@ -60,7 +60,7 @@ if (!empty($ubah)) {
                 </tr>
             </table>
         </form>
-        <p>Catatan : Kosongkan Kolom Jika Tidak Ingin Di Rubah Datanya</p>
+        <p>Catatan : Kosongkan Kolom Password Jika Tidak Ingin Di Rubah Datanya</p>
         <?php
         if ($error == 1) :
             echo '<p>Tidak ada data yang dirubah, pastikan ada perubahan pada Nama atau Password sebelumnya.</p>';
