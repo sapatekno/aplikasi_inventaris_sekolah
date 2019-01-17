@@ -22,6 +22,7 @@ if (!empty($login)) {
 
         //menyimpan data user ke session
         $_SESSION['login'] = TRUE;
+        $_SESSION['id_petugas'] = $user['id_petugas'];
         $_SESSION['username'] = $username;
         $_SESSION['nama'] = $user['nama'];
         $_SESSION['id_level'] = $user['id_level'];

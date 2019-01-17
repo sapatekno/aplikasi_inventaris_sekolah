@@ -77,13 +77,13 @@ $jumlah_data_per_halaman = mysqli_num_rows($inventaris);
                     <tr>
                         <td><?= $no ?></td>
                         <td><?= $data['kode_inventaris'] ?></td>
-                        <td><?= $data['tanggal_register'] ?></td>
+                        <td><?= _tanggal_indo($data['tanggal_register']) ?></td>
                         <td><?= $data['nama'] ?></td>
-                        <td><?= $data['id_jenis'] ?></td>
-                        <td><?= $data['id_ruang'] ?></td>
-                        <td><?= $data['jumlah'] ?></td>
-                        <td><?= $data['kondisi'] ?></td>
-                        <td><?= $data['id_petugas'] ?></td>
+                        <td><?= db_jenis_get_nama_by_id($db_conn, $data['id_jenis']) ?></td>
+                        <td><?= db_ruang_get_nama_by_id($db_conn, $data['id_ruang']) ?></td>
+                        <td><?= $data['jumlah'] ?> Item</td>
+                        <td><?= ucwords($data['kondisi']) ?></td>
+                        <td><?= db_petugas_get_nama_by_id($db_conn, $data['id_petugas']) ?></td>
                         <td>
                             <a href="./inventaris_edit.php?id=<?= $data['id_inventaris'] ?>">EDIT</a>
                             <a href="./inventaris_hapus.php?id=<?= $data['id_inventaris'] ?>">HAPUS</a>

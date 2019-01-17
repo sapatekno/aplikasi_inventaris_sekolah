@@ -12,37 +12,28 @@ _isLogin();
         <title>Aplikasi Inventory</title>
     </head>
     <body>
-        <table>
-            <tr>
-                <td>Username</td>
-                <td>:</td>
-                <td><?= $_SESSION['username'] ?></td>
-            </tr>
-            <tr>
-                <td>Nama Pengguna</td>
-                <td>:</td>
-                <td><?= $_SESSION['nama'] ?></td>
-            </tr>
-            <tr>
-                <td>Level Pengguna</td>
-                <td>:</td>
-                <td><?= db_level_get_nama_by_id($db_conn, $_SESSION['id_level']) ?></td>
-            </tr>
-        </table>
-        <br/>
         <ul>
+            <b>Biodata</b>
+            <li>Username : <?= $_SESSION['username'] ?></li>
+            <li>Nama Pengguna : <?= $_SESSION['nama'] ?></li>
+            <li>Level Pengguna : <?= db_level_get_nama_by_id($db_conn, $_SESSION['id_level']) ?></li>
+        </ul>
+        <ul>
+            <b>Transaksi</b>
+            <li><a href="./peminjaman_tambah.php">Tambah Transaksi</a></li>
+            <li><a href="./peminjaman.php">Daftar Transaksi</a></li>
+            <li><a href="./laporan.php">Laporan</a></li>
+            <br/>
             <?php if ($_SESSION['id_level'] == 1) : ?>
                 <!-- menu untuk level admin -->
-                <li><a href="./inventaris.php">Data Inventaris</a></li>
-                <li><a href="./jenis.php">Data Jenis Barang</a></li>
-                <li><a href="./pegawai.php">Data Pegawai</a></li>
-                <li><a href="./ruang.php">Data Ruangan</a></li>
+                <b>Data Master</b>
+                <li><a href="./pegawai.php">Pegawai</a></li>
+                <li><a href="./inventaris.php">Inventaris</a></li>
+                <li><a href="./jenis.php">Jenis Inventaris</a></li>
+                <li><a href="./ruang.php">Ruangan</a></li>
+                <br/>
             <?php endif; ?>
-            <?php if ($_SESSION['id_level'] == 2) : ?>
-                <!-- menu untuk level operator -->
-                <li><a href="./transaksi.php">Transaksi</a></li>
-                <li><a href="./laporan.php">Laporan</a></li>
-            <?php endif; ?>
+            <b>Pengaturan</b>
             <li><a href="./profil.php">Profil</a></li>
             <li><a href="./logout.php">Logout</a></li>
         </ul>

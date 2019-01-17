@@ -32,6 +32,15 @@ function db_petugas_get_data_by_username($db_conn, $username) {
     return $result;
 }
 
+//mengambil data user berdasarkan username
+function db_petugas_get_nama_by_id($db_conn, $id) {
+    $sql = "SELECT nama FROM petugas WHERE id_petugas = '$id'";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+    $result = mysqli_fetch_assoc($query);
+
+    return $result['nama'];
+}
+
 //mengupdate data petugas lama
 function db_petugas_update($db_conn, $username, $nama, $password) {
     if (!empty($password)) {
@@ -45,13 +54,30 @@ function db_petugas_update($db_conn, $username, $nama, $password) {
     return $result;
 }
 
-//mengambil nama level berdasarkan id leverl
+//mengambil nama level berdasarkan id level
 function db_level_get_nama_by_id($db_conn, $id_level) {
     $sql = "SELECT nama_level FROM level WHERE id_level = '$id_level'";
     $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
     $result = mysqli_fetch_assoc($query);
 
     return $result['nama_level'];
+}
+
+//mengambil nama jenis berdasarkan id jenis
+function db_jenis_get_nama_by_id($db_conn, $id_level) {
+    $sql = "SELECT nama_jenis FROM jenis WHERE id_jenis = '$id_level'";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+    $result = mysqli_fetch_assoc($query);
+
+    return $result['nama_jenis'];
+}
+
+//mengambil semua data jenis untuk inventaris
+function db_jenis_all($db_conn) {
+    $sql = "SELECT * FROM jenis";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+
+    return $query;
 }
 
 //mengambil semua data jenis
@@ -119,6 +145,14 @@ function db_jenis_get_data_by_id($db_conn, $id) {
     return $result;
 }
 
+//mengambil semua data ruang untuk inventaris
+function db_ruang_all($db_conn) {
+    $sql = "SELECT * FROM ruang";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+
+    return $query;
+}
+
 //mengambil semua data ruang
 function db_ruang_get_all($db_conn, $limit, $offset) {
     $sql = "SELECT * FROM ruang ORDER BY id_ruang DESC LIMIT $limit OFFSET $offset";
@@ -149,6 +183,15 @@ function db_ruang_count_by_cari($db_conn, $katacari) {
     $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
 
     return $query;
+}
+
+//mengambil nama ruang berdasarkan id ruang
+function db_ruang_get_nama_by_id($db_conn, $id_ruang) {
+    $sql = "SELECT nama_ruang FROM ruang WHERE id_ruang = '$id_ruang'";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+    $result = mysqli_fetch_assoc($query);
+
+    return $result['nama_ruang'];
 }
 
 //menambahkan data ruang baru
@@ -259,7 +302,7 @@ function db_inventaris_get_all($db_conn, $limit, $offset) {
 
 //mengambil semua data inventaris berdasarkan pencarian
 function db_inventaris_get_all_by_cari($db_conn, $limit, $offset, $katacari) {
-    $sql = "SELECT * FROM inventaris WHERE nama_inventaris LIKE '%$katacari%' ORDER BY nip ASC LIMIT $limit OFFSET $offset";
+    $sql = "SELECT * FROM inventaris WHERE nama LIKE '%$katacari%' ORDER BY id_inventaris ASC LIMIT $limit OFFSET $offset";
     $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
 
     return $query;
@@ -275,7 +318,7 @@ function db_inventaris_count($db_conn) {
 
 //menghitung semua data inventaris
 function db_inventaris_count_by_cari($db_conn, $katacari) {
-    $sql = "SELECT * FROM inventaris WHERE nama_inventaris LIKE '%$katacari%'";
+    $sql = "SELECT * FROM inventaris WHERE nama LIKE '%$katacari%'";
     $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
 
     return $query;
@@ -290,8 +333,8 @@ function db_inventaris_add($db_conn, $kode_inventaris, $tanggal_register, $nama,
 }
 
 //mengupdate data inventaris lama
-function db_inventaris_update($db_conn, $id, $nip, $nama_inventaris, $alamat) {
-    $sql = "UPDATE inventaris SET nip = '$nip', nama_inventaris = '$nama_inventaris', alamat = '$alamat' WHERE id_inventaris = $id";
+function db_inventaris_update($db_conn, $id, $tanggal_register, $nama, $id_jenis, $id_ruang, $jumlah, $kondisi, $keterangan, $id_petugas) {
+    $sql = "UPDATE inventaris SET tanggal_register = '$tanggal_register', nama = '$nama', id_jenis = $id_jenis, id_ruang = $id_ruang, jumlah = $jumlah, kondisi = '$kondisi', keterangan = '$keterangan', id_petugas = $id_petugas WHERE id_inventaris = $id";
     $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
     $result = mysqli_affected_rows($db_conn);
     return $result;
@@ -310,6 +353,5 @@ function db_inventaris_get_data_by_id($db_conn, $id) {
     $sql = "SELECT * FROM inventaris WHERE id_inventaris = '$id'";
     $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
     $result = mysqli_fetch_assoc($query);
-
     return $result;
 }
