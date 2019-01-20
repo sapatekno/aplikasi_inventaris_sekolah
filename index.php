@@ -20,8 +20,8 @@ _isLogin();
         </ul>
         <ul>
             <b>Transaksi</b>
-            <li><a href="./peminjaman_tambah.php">Tambah Transaksi</a></li>
-            <li><a href="./peminjaman.php">Daftar Transaksi</a></li>
+            <li><a href="./peminjaman_tambah.php">Tambah Peminjaman</a></li>
+            <li><a href="./peminjaman.php">Daftar Peminjaman</a></li>
             <li><a href="./laporan.php">Laporan</a></li>
             <br/>
             <?php if ($_SESSION['id_level'] == 1) : ?>

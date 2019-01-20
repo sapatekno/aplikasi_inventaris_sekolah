@@ -33,50 +33,50 @@ if ($clear != null) {
 
 if (isset($_SESSION['cari']) == TRUE) {
     $katacari = $_SESSION['katacari'];
-    $jenis = db_jenis_get_all_by_cari($db_conn, $limit, $offset, $katacari);
-    $total = db_jenis_count_by_cari($db_conn, $katacari);
+    $peminjaman = db_peminjaman_get_all_by_cari($db_conn, $limit, $offset, $katacari);
+    $total = db_peminjaman_count_by_cari($db_conn, $katacari);
 } else {
-    $jenis = db_jenis_get_all($db_conn, $limit, $offset);
-    $total = db_jenis_count($db_conn);
+    $peminjaman = db_peminjaman_get_all($db_conn, $limit, $offset);
+    $total = db_peminjaman_count($db_conn);
 }
 
 $no = $offset + 1;
 $jumlah_data_semua = mysqli_num_rows($total);
-$jumlah_data_per_halaman = mysqli_num_rows($jenis);
+$jumlah_data_per_halaman = mysqli_num_rows($peminjaman);
 ?>
 <html>
     <head>
         <title>Data Jenis</title>
     </head>
     <body>
-        <p><a href="./index.php">Home</a> > Jenis Barang</p>
-        <p><a href="./jenis_tambah.php">Tambah data Jenis Barang</a></p>
-        <form action="./jenis.php" method="post">
-            <input type="text" name="katacari" minlength="3" required placeholder="Cari nama jenis"><input type="submit" name="cari" value="Cari">
+        <p><a href="./index.php">Home</a> > Peminjaman Inventaris</p>
+        <p><a href="./peminjaman_tambah.php">Tambah data Peminjaman Inventaris</a></p>
+        <form action="./peminjaman.php" method="post">
+            <input type="text" name="katacari" minlength="3" required placeholder="Cari nama peminjaman"><input type="submit" name="cari" value="Cari">
         </form>
         <?php if (isset($_SESSION['cari']) == true) : ?>
-            <p>Mencari data <?= $_SESSION['katacari'] ?>, <a href="./jenis.php?c=1">Hapus pencarian</a></p>
+            <p>Mencari data <?= $_SESSION['katacari'] ?>, <a href="./peminjaman.php?c=1">Hapus pencarian</a></p>
         <?php endif; ?>
         <?php if ($jumlah_data_per_halaman < 1) : ?>
-            <p><b>Data jenis barang tidak ditemukan.</b></p>
+            <p><b>Data peminjaman barang tidak ditemukan.</b></p>
         <?php else : ?>
             <table border="1">
                 <tr>
                     <th>No.</th>
                     <th>Kode Jenis</th>
-                    <th>Nama Jenis Barang</th>
+                    <th>Nama Peminjaman Inventaris</th>
                     <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
-                <?php foreach ($jenis as $data) : ?>
+                <?php foreach ($peminjaman as $data) : ?>
                     <tr>
                         <td><?= $no ?></td>
-                        <td><?= $data['kode_jenis'] ?></td>
-                        <td><?= $data['nama_jenis'] ?></td>
+                        <td><?= $data['kode_peminjaman'] ?></td>
+                        <td><?= $data['nama_peminjaman'] ?></td>
                         <td><?= $data['keterangan'] ?></td>
                         <td>
-                            <a href="./jenis_edit.php?id=<?= $data['id_jenis'] ?>">EDIT</a>
-                            <a href="./jenis_hapus.php?id=<?= $data['id_jenis'] ?>">HAPUS</a>
+                            <a href="./peminjaman_edit.php?id=<?= $data['id_peminjaman'] ?>">EDIT</a>
+                            <a href="./peminjaman_hapus.php?id=<?= $data['id_peminjaman'] ?>">HAPUS</a>
                         </td>
                     </tr>
                     <?php $no++ ?>
@@ -85,10 +85,10 @@ $jumlah_data_per_halaman = mysqli_num_rows($jenis);
             <p>Total data : <?= $jumlah_data_semua ?> Item</p>
             <p>
                 <?php if ($offset > 0) : ?>
-                    <a href="./jenis.php?o=<?= $offset - $limit ?>">Sebelumnya</a> 
+                    <a href="./peminjaman.php?o=<?= $offset - $limit ?>">Sebelumnya</a> 
                 <?php endif; ?>                    
                 <?php if (($offset + $limit) < $jumlah_data_semua) : ?>
-                    <a href="./jenis.php?o=<?= $offset + $limit ?>">Selanjutnya</a> 
+                    <a href="./peminjaman.php?o=<?= $offset + $limit ?>">Selanjutnya</a> 
                 <?php endif; ?>
             </p>
         <?php endif; ?>

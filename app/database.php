@@ -355,3 +355,35 @@ function db_inventaris_get_data_by_id($db_conn, $id) {
     $result = mysqli_fetch_assoc($query);
     return $result;
 }
+
+//mengambil semua data peminjaman
+function db_peminjaman_get_all($db_conn, $limit, $offset) {
+    $sql = "SELECT * FROM peminjaman ORDER BY id_peminjaman ASC LIMIT $limit OFFSET $offset";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+
+    return $query;
+}
+
+//mengambil semua data peminjaman berdasarkan pencarian
+function db_peminjaman_get_all_by_cari($db_conn, $limit, $offset, $katacari) {
+    $sql = "SELECT * FROM peminjaman WHERE nama_peminjaman LIKE '%$katacari%' ORDER BY nip ASC LIMIT $limit OFFSET $offset";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+
+    return $query;
+}
+
+//menghitung data peminjaman
+function db_peminjaman_count($db_conn) {
+    $sql = "SELECT * FROM peminjaman";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+
+    return $query;
+}
+
+//menghitung semua data peminjaman
+function db_peminjaman_count_by_cari($db_conn, $katacari) {
+    $sql = "SELECT * FROM peminjaman WHERE nama_peminjaman LIKE '%$katacari%'";
+    $query = mysqli_query($db_conn, $sql) or die(mysqli_error($db_conn));
+
+    return $query;
+}
