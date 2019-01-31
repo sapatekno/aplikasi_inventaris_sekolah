@@ -46,7 +46,7 @@ $jumlah_data_per_halaman = mysqli_num_rows($peminjaman);
 ?>
 <html>
     <head>
-        <title>Data Jenis</title>
+        <title>Data Peminjaman Inventaris</title>
     </head>
     <body>
         <p><a href="./index.php">Home</a> > Peminjaman Inventaris</p>
@@ -63,19 +63,25 @@ $jumlah_data_per_halaman = mysqli_num_rows($peminjaman);
             <table border="1">
                 <tr>
                     <th>No.</th>
-                    <th>Kode Jenis</th>
-                    <th>Nama Peminjaman Inventaris</th>
-                    <th>Keterangan</th>
+                    <th>Kode Peminjaman</th>
+                    <th>Nama Peminjam</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Kembali</th>
+                    <th>Status Peminjaman</th>
+                    <th>Nama Petugas</th>
                     <th>Aksi</th>
                 </tr>
                 <?php foreach ($peminjaman as $data) : ?>
                     <tr>
                         <td><?= $no ?></td>
-                        <td><?= $data['kode_peminjaman'] ?></td>
-                        <td><?= $data['nama_peminjaman'] ?></td>
-                        <td><?= $data['keterangan'] ?></td>
+                        <td><?= $data['id_peminjaman'] ?></td>
+                        <td><?= $data['nama_pegawai'] ?></td>
+                        <td><?= _tanggal_indo($data['tanggal_pinjam']) ?></td>
+                        <td><?= _tanggal_indo($data['tanggal_kembali']) ?></td>
+                        <td><?= _status_peminjaman_nama($data['status_peminjaman']) ?></td>
+                        <td><?= $data['nama'] ?></td>
                         <td>
-                            <a href="./peminjaman_edit.php?id=<?= $data['id_peminjaman'] ?>">EDIT</a>
+                            <a href="./peminjaman_detail.php?id=<?= $data['id_peminjaman'] ?>">DETAIL</a>
                             <a href="./peminjaman_hapus.php?id=<?= $data['id_peminjaman'] ?>">HAPUS</a>
                         </td>
                     </tr>
